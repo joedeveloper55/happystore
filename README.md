@@ -8,7 +8,7 @@ performance, and robustness just doesn't quite cut it for you, Happystore is the
 persistance tool you need.
 
 Major features include:
-  * stores arbitrary python objects as values. serialization and deserialization is trivially pluggable.
+  * can store arbitrary python objects as values. serialization and deserialization are trivially pluggable.
   * all the expected get, set, delete, and has operations expected of a key-value databse
   * a means to efficiently query a "range" or collection of keys at once, rather than just one at a time
   * a few more convenience operations for optimizing performance (bulk_get, bulk_set, bulk_delete)
@@ -27,7 +27,7 @@ Actually, behind the scenes it is backed by sqlite.
 To connect to a HappyStore, you must explicitly provide a "serializer object" to the constructor
 that controls the serialization and deserialization of python objects to and from bytes (for your
 convenience, this module comes with some 'batteries included' serializers in the forms of
-PickleSerializer and JsonSerializer. You can create your own by extending the Serializer abstract
+PickleSerializer, JsonSerializer and RawSerializer. You can create your own by extending the Serializer abstract
 base class).
 
 ```python
@@ -170,7 +170,7 @@ To explicitly begin a transaction, you use the "transaction" method to get a con
 ... 
 
 ```
-The above implements an atomic thread-safe and process-safe incrrement operation on the 
+The above implements an atomic thread-safe and process-safe increment operation on the 
 integer stored at 'a'.
 
 Happystore Transactions can be explicitly aborted from within by raising an AbortionError,
